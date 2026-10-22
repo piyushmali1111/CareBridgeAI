@@ -246,8 +246,7 @@ export default function App() {
                 Accessible Health Literacy for <span className="text-teal-600">Patients & Caregivers</span>
               </h1>
               <p className="mt-1.5 text-slate-600 text-sm sm:text-base leading-relaxed">
-                Converts hospital discharge notes and scanned prescription photos into 5th-grade plain guidance
-                in <strong>English</strong>, <strong>Hindi (हिंदी)</strong>, or <strong>Marathi (मराठी)</strong>.
+                Transform complex hospital discharge notes and prescription photos into clear, easy-to-follow care instructions in <strong>English</strong>, <strong>Hindi (हिंदी)</strong>, or <strong>Marathi (मराठी)</strong>.
               </p>
             </div>
 

@@ -1,6 +1,6 @@
 {
   "name": "CareBridge AI",
-  "description": "Transforms complex medical discharge summaries and clinical notes into simple, accessible 5th-grade guidance, medication schedules, emergency red flags, and daily care checklists for patients.",
+  "description": "Transforms complex medical discharge summaries and clinical notes into simple, accessible guidance, medication schedules, emergency red flags, and daily care checklists for patients.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
