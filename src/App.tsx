@@ -23,6 +23,7 @@ import { MedicationTable } from './components/MedicationTable';
 import { DailyCareChecklist } from './components/DailyCareChecklist';
 import { JargonTranslator } from './components/JargonTranslator';
 import { WhatsAppShareBanner } from './components/WhatsAppShareBanner';
+import { ImageRedactionCanvas } from './components/ImageRedactionCanvas';
 import {
   sampleNotes,
   cardiacBackupResultEn,
@@ -40,6 +41,8 @@ export default function App() {
   
   // Multimodal image state
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [redactedImageDataUrl, setRedactedImageDataUrl] = useState<string | null>(null);
+  const [redactionCount, setRedactionCount] = useState<number>(0);
   const [imageFileMime, setImageFileMime] = useState<string>('image/jpeg');
   const [imageFileName, setImageFileName] = useState<string>('');
 
@@ -93,6 +96,8 @@ export default function App() {
 
   const handleClearImage = () => {
     setImagePreview(null);
+    setRedactedImageDataUrl(null);
+    setRedactionCount(0);
     setImageFileName('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -151,9 +156,10 @@ export default function App() {
       if (inputMode === 'text') {
         payload.clinicalText = clinicalText;
       } else {
+        const imageToSend = redactedImageDataUrl || imagePreview;
         payload.imageData = {
           mimeType: imageFileMime,
-          data: imagePreview,
+          data: imageToSend,
         };
       }
 
@@ -214,11 +220,9 @@ export default function App() {
   }[fontSize];
 
   return (
-    <div className={`min-h-screen bg-slate-50 text-slate-800 ${fontSizeClasses} flex flex-col font-sans`}>
+    <div className="min-h-screen bg-slate-50 text-slate-800 text-base flex flex-col font-sans">
       {/* Top Accessible Navbar */}
       <Header
-        fontSize={fontSize}
-        setFontSize={setFontSize}
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={(lang) => {
           setSelectedLanguage(lang);
@@ -378,43 +382,41 @@ export default function App() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-20 h-20 rounded-lg overflow-hidden border border-slate-200 bg-white shrink-0 shadow-xs flex items-center justify-center">
-                      <img
-                        src={imagePreview}
-                        alt="Prescription preview"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-slate-900 flex items-center space-x-1.5">
-                        <ImageIcon className="w-4 h-4 text-teal-600" />
-                        <span className="truncate max-w-xs">{imageFileName || 'Scanned Medical Report'}</span>
-                      </div>
-                      <p className="text-xs text-emerald-700 font-semibold mt-0.5">
-                        ✓ Ready for Gemma Multimodal Vision OCR
-                      </p>
+                <div className="space-y-3">
+                  {/* Action Bar */}
+                  <div className="flex items-center justify-between pb-1">
+                    <span className="text-xs font-bold text-slate-700 flex items-center">
+                      <ImageIcon className="w-4 h-4 text-teal-600 mr-1.5" />
+                      {imageFileName || 'Scanned Medical Report'}
+                    </span>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        className="px-3 py-1.5 text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg shadow-2xs transition"
+                      >
+                        Change Photo
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleClearImage}
+                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg transition"
+                        title="Remove image"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
                   </div>
 
-                  <div className="flex items-center space-x-2">
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="px-3 py-1.5 text-xs font-medium bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 rounded-lg"
-                    >
-                      Change Photo
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleClearImage}
-                      className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg"
-                      title="Remove image"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
+                  {/* Interactive Redaction Canvas */}
+                  <ImageRedactionCanvas
+                    originalImageSrc={imagePreview}
+                    onRedactedImageChange={(url, count) => {
+                      setRedactedImageDataUrl(url);
+                      setRedactionCount(count);
+                    }}
+                    fileName={imageFileName}
+                  />
                 </div>
               )}
             </div>
@@ -452,8 +454,11 @@ export default function App() {
                 <>
                   <Sparkles className="w-4 h-4 text-teal-200" />
                   <span>
-                    {inputMode === 'image' ? 'Scan & Simplify in ' : 'Simplify in '}
-                    {selectedLanguage === 'hi' ? 'Hindi (हिंदी)' : selectedLanguage === 'mr' ? 'Marathi (मराठी)' : 'English'}
+                    {inputMode === 'image'
+                      ? redactionCount > 0
+                        ? `🔒 Scan & Simplify (${redactionCount} Redacted)`
+                        : `Scan & Simplify in ${selectedLanguage === 'hi' ? 'Hindi' : selectedLanguage === 'mr' ? 'Marathi' : 'English'}`
+                      : `Simplify in ${selectedLanguage === 'hi' ? 'Hindi (हिंदी)' : selectedLanguage === 'mr' ? 'Marathi (मराठी)' : 'English'}`}
                   </span>
                 </>
               )}
@@ -479,16 +484,25 @@ export default function App() {
             <OverviewAndAudioPlayer data={result} />
 
             {/* 3. Emergency Red Flags Alert Box */}
-            <EmergencyRedFlagsBanner redFlags={result.emergencyRedFlags} />
+            <EmergencyRedFlagsBanner
+              redFlags={result.emergencyRedFlags}
+              language={result.targetLanguage || selectedLanguage}
+            />
 
             {/* 4. Executive Summary Card */}
             <ExecutiveSummaryCard data={result} />
 
-            {/* 5. Medication Table (Preserving 100% Latin Script Medicine Names) */}
-            <MedicationTable medications={result.medications} />
+            {/* 5. Medication Table (Preserving 100% Latin Script Medicine Names, Fully Translated Schedule & Purpose) */}
+            <MedicationTable
+              medications={result.medications}
+              language={result.targetLanguage || selectedLanguage}
+            />
 
             {/* 6. Follow-Up Care & Daily Checklist */}
-            <DailyCareChecklist careData={result.dailyCareAndFollowUp} />
+            <DailyCareChecklist
+              careData={result.dailyCareAndFollowUp}
+              language={result.targetLanguage || selectedLanguage}
+            />
 
             {/* 7. Medical Jargon Decoder */}
             <JargonTranslator glossary={result.medicalJargonGlossary} />

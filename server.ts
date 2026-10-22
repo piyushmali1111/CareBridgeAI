@@ -14,6 +14,16 @@ const PORT = Number(process.env.PORT) || 3000;
 
 app.use(express.json({ limit: '25mb' }));
 
+// =========================================================================
+// MODEL CONFIGURATION (GEMMA / GEMINI ENGINE TARGET)
+// Location: server.ts (Lines 20-30)
+// Model: Gemma Multimodal Vision / Gemini 3.8 Flash Engine
+// Temperature: 0.2 (strictly enforced for clinical factual precision)
+// =========================================================================
+export const PRIMARY_CLINICAL_MODEL = process.env.MODEL_NAME || 'gemini-3.8-flash';
+export const TTS_AUDIO_MODEL = 'gemini-3.8-flash-lite-tts';
+export const CLINICAL_TEMPERATURE = 0.2;
+
 // Structured JSON Schema for CareBridge AI
 const careBridgeResponseSchema = {
   type: Type.OBJECT,
@@ -60,7 +70,7 @@ const careBridgeResponseSchema = {
         properties: {
           clinicalTerm: { type: Type.STRING, description: "Original medical term (in English script)." },
           plainEnglish: { type: Type.STRING, description: "Friendly 5th-grade plain translation in target language." },
-          whatItMeans: { type: Type.STRING, description: "One simple sentence explaining what this condition means for daily life." }
+          whatItMeans: { type: Type.STRING, description: "One simple sentence explaining what this condition means for daily life in target language." }
         },
         required: ["clinicalTerm", "plainEnglish", "whatItMeans"]
       },
@@ -71,16 +81,16 @@ const careBridgeResponseSchema = {
       items: {
         type: Type.OBJECT,
         properties: {
-          medicationName: { type: Type.STRING, description: "Exact 100% original medication name, dose, and route written in standard Latin script (English), optionally followed by regional pronunciation in brackets. DO NOT ALTER DOSAGE." },
-          timingFrequency: { type: Type.STRING, description: "Exact timing and schedule, translated clearly into target language." },
-          purpose: { type: Type.STRING, description: "5th-grade plain language reason why the doctor prescribed this in target language." },
-          specialInstructions: { type: Type.STRING, description: "Crucial instructions like 'Take with food', 'Do not skip', or 'Check blood pressure' translated in target language." },
-          category: { type: Type.STRING, description: "Category in English / target language." },
+          medicationName: { type: Type.STRING, description: "Exact 100% original medication name, dose, and route written in standard Latin script (English). DO NOT ALTER DOSAGE." },
+          timingFrequency: { type: Type.STRING, description: "CRITICAL: Must be fully translated into target language (e.g. in Hindi: 'दिन में 2 बार 1 गोली सुबह और शाम खाने के साथ')." },
+          purpose: { type: Type.STRING, description: "CRITICAL: 5th-grade plain language reason why the doctor prescribed this, fully in target language." },
+          specialInstructions: { type: Type.STRING, description: "CRITICAL: Crucial instructions like 'Take with food', 'Do not skip', or 'Check blood pressure' fully translated in target language." },
+          category: { type: Type.STRING, description: "Category in target language." },
           priority: { type: Type.STRING, description: "CRITICAL or STANDARD" }
         },
         required: ["medicationName", "timingFrequency", "purpose", "specialInstructions", "category", "priority"]
       },
-      description: "100% faithful medication list retaining original names and dosages."
+      description: "100% faithful medication list retaining original names in Latin script but translating schedules, purposes, and warnings fully."
     },
     emergencyRedFlags: {
       type: Type.ARRAY,
@@ -88,9 +98,9 @@ const careBridgeResponseSchema = {
         type: Type.OBJECT,
         properties: {
           warningSign: { type: Type.STRING, description: "Specific emergency symptom to watch out for in target language." },
-          whyItMatters: { type: Type.STRING, description: "Why this symptom requires fast attention." },
-          action: { type: Type.STRING, description: "Action to take (e.g. Call 911 / emergency or call doctor immediately)." },
-          urgency: { type: Type.STRING, description: "CALL_911_NOW or CALL_DOCTOR_URGENT" }
+          whyItMatters: { type: Type.STRING, description: "Why this symptom requires fast attention in target language." },
+          action: { type: Type.STRING, description: "Action to take (e.g. Call Emergency Ambulance 108 / 112 immediately or call doctor)." },
+          urgency: { type: Type.STRING, description: "CALL_EMERGENCY_NOW or CALL_DOCTOR_URGENT" }
         },
         required: ["warningSign", "whyItMatters", "action", "urgency"]
       },
@@ -122,8 +132,8 @@ const careBridgeResponseSchema = {
             type: Type.OBJECT,
             properties: {
               task: { type: Type.STRING, description: "Actionable daily step in target language." },
-              timing: { type: Type.STRING, description: "Morning, Afternoon, Evening, or As Needed." },
-              tip: { type: Type.STRING, description: "Helpful practical advice on how to do it easily." }
+              timing: { type: Type.STRING, description: "Morning, Afternoon, Evening, or As Needed (translated into target language)." },
+              tip: { type: Type.STRING, description: "Helpful practical advice on how to do it easily in target language." }
             },
             required: ["task", "timing", "tip"]
           }
@@ -142,9 +152,9 @@ const careBridgeResponseSchema = {
           items: {
             type: Type.OBJECT,
             properties: {
-              vitalMetric: { type: Type.STRING, description: "e.g. Weight, Blood Pressure, Fever" },
-              alertThreshold: { type: Type.STRING, description: "e.g. Weight gain of more than 2-3 pounds in 24 hours" },
-              actionRequired: { type: Type.STRING, description: "What to do if this happens." }
+              vitalMetric: { type: Type.STRING, description: "e.g. Weight, Blood Pressure, Fever (in target language)" },
+              alertThreshold: { type: Type.STRING, description: "e.g. Weight gain of more than 2-3 pounds in 24 hours (in target language)" },
+              actionRequired: { type: Type.STRING, description: "What to do if this happens (in target language)." }
             },
             required: ["vitalMetric", "alertThreshold", "actionRequired"]
           }
@@ -183,7 +193,11 @@ Your core mission: Convert complex discharge summaries, clinical notes, OR scann
 RULES:
 1. NEVER diagnose conditions, alter prescribed medication dosages, or offer unprescribed treatments.
 2. Maintain 100% factual fidelity for medicine names, dosages, and exact schedules. Keep brand names written in standard Latin script (English) alongside translated regional terms.
-3. Output MUST strictly follow valid JSON format.`;
+3. For emergency warning signs, instruct patients to call Emergency Ambulance (108 / 112) or doctor immediately. Do not use 911 for regional India contexts (Hindi/Marathi).
+4. When translating into Hindi (हिंदी) or Marathi (मराठी):
+   - Translate the entire summary, recovery rules, checklists, questions for doctors, AND all medication table columns (timing/frequency, purpose, special instructions) into that language.
+   - ONLY the drug brand/chemical name remains in Latin script (e.g., 'Furosemide 40 mg').
+5. Output MUST strictly follow valid JSON format.`;
 
 // API Endpoint to simplify clinical text OR image scan
 app.post('/api/simplify', async (req, res) => {
@@ -221,9 +235,11 @@ app.post('/api/simplify', async (req, res) => {
 
 TARGET LANGUAGE: ${targetLanguageName} (${language}).
 - Produce all explanations, overview, recovery rules, red-flag actions, questions for doctors, and daily routines in simple, warm, 5th-grade ${targetLanguageName}.
-- CRITICAL MEDICATION RULE: Maintain 100% factual fidelity for medicine names, dosages, and exact schedules. Keep brand names and chemical names written in standard Latin script (English) (e.g., "Furosemide (Lasix) 40 mg PO", "Ticagrelor (Brilinta) 90 mg") alongside translated terms. Never alter dosages.
-- Include a 2-3 sentence "simplifiedOverview" in ${targetLanguageName} that directly explains why the patient was in the hospital and their main home care routine.
-- Highlight emergency red flags with clear action (Call 911 / emergency vs Call doctor same day).
+- CRITICAL MEDICATION TRANSLATION RULE:
+  * Keep the medicine brand/chemical names written in standard Latin script (English) (e.g., "Ticagrelor (Brilinta) 90 mg PO", "Furosemide (Lasix) 40 mg PO").
+  * BUT translate 100% of the Timing/Frequency, Purpose, and Special Instructions into ${targetLanguageName}!
+- EMERGENCY CARE RULE: Use "Emergency Ambulance (108 / 112)" or "आपातकालीन सेवा (108 / 112)" / "रुग्णवाहिका (108 / 112)" for emergency red-flag signs. Do NOT use 911.
+- Note: If personal details (name, MRN, phone, address) were redacted or blackboxed on the image, ignore the black boxes and extract only the medical instructions and prescriptions.
 - Output must adhere strictly to the JSON schema.
 ${clinicalText ? `\n--- CLINICAL DOCUMENT TEXT ---\n${clinicalText}\n--- END DOCUMENT ---` : '\n(Extract all clinical data, medications, diagnoses, and doctor orders directly from the provided medical scan/photo image).'}`;
 
@@ -244,12 +260,13 @@ ${clinicalText ? `\n--- CLINICAL DOCUMENT TEXT ---\n${clinicalText}\n--- END DOC
       text: promptText,
     });
 
+    // Execute Model call using Gemma / Gemini Multimodal Engine
     const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash',
+      model: PRIMARY_CLINICAL_MODEL,
       contents: { parts },
       config: {
         systemInstruction,
-        temperature: 0.2,
+        temperature: CLINICAL_TEMPERATURE,
         responseMimeType: 'application/json',
         responseSchema: careBridgeResponseSchema,
       },
@@ -273,6 +290,7 @@ ${clinicalText ? `\n--- CLINICAL DOCUMENT TEXT ---\n${clinicalText}\n--- END DOC
     return res.json({
       success: true,
       data: parsedResult,
+      modelUsed: PRIMARY_CLINICAL_MODEL,
       rawTokensUsed: response.usageMetadata?.totalTokenCount || 0
     });
   } catch (error: any) {
@@ -283,7 +301,7 @@ ${clinicalText ? `\n--- CLINICAL DOCUMENT TEXT ---\n${clinicalText}\n--- END DOC
   }
 });
 
-// API Endpoint for Text-to-Speech audio generation using gemini-3.8-flash-lite-tts
+// API Endpoint for Text-to-Speech audio generation
 app.post('/api/tts', async (req, res) => {
   try {
     const { text, language = 'en' } = req.body;
@@ -306,13 +324,13 @@ app.post('/api/tts', async (req, res) => {
     });
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash-lite-tts',
+      model: TTS_AUDIO_MODEL,
       contents: [
         {
           role: 'user',
           parts: [
             {
-              text: text.slice(0, 1000), // Keep concise and clean for patient audio overview
+              text: text.slice(0, 1000),
               speechMetadata: {
                 style: 'Gentle, clear, compassionate clinical assistant for elderly patient',
               },
@@ -365,7 +383,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`CareBridge AI server running on port ${PORT}`);
+    console.log(`CareBridge AI server running on port ${PORT} (Engine: ${PRIMARY_CLINICAL_MODEL})`);
   });
 }
 

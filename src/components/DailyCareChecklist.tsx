@@ -13,7 +13,7 @@ import {
   CheckCircle,
   AlertCircle
 } from 'lucide-react';
-import { Appointment, DailyChecklistItem, LifestyleGuidelines, VitalSignAlert } from '../types';
+import { Appointment, DailyChecklistItem, LifestyleGuidelines, VitalSignAlert, SupportedLanguage } from '../types';
 
 interface DailyCareChecklistProps {
   careData: {
@@ -22,10 +22,79 @@ interface DailyCareChecklistProps {
     lifestyleGuidelines: LifestyleGuidelines;
     vitalSignAlerts: VitalSignAlert[];
   };
+  language?: SupportedLanguage;
 }
 
-export const DailyCareChecklist: React.FC<DailyCareChecklistProps> = ({ careData }) => {
+export const DailyCareChecklist: React.FC<DailyCareChecklistProps> = ({ careData, language = 'en' }) => {
   const { appointments, dailyChecklist, lifestyleGuidelines, vitalSignAlerts } = careData;
+
+  const translations: Record<string, {
+    routineBadge: string;
+    routineTitle: string;
+    progress: string;
+    routineDesc: string;
+    visitsBadge: string;
+    visitsTitle: string;
+    questionsToAsk: string;
+    markScheduled: string;
+    confirmed: string;
+    vitalsTitle: string;
+    lifestyleTitle: string;
+    dietRules: string;
+    activityRules: string;
+    woundRules: string;
+  }> = {
+    en: {
+      routineBadge: 'Home Routine Checklist',
+      routineTitle: 'Daily Care Checklist',
+      progress: "Today's Progress",
+      routineDesc: 'Follow this simple daily routine to keep your recovery steady and prevent complications. Check off each step as you complete it during the day:',
+      visitsBadge: 'Clinic & Doctor Visits',
+      visitsTitle: 'Follow-Up Appointments & Questions to Ask',
+      questionsToAsk: 'Questions to ask at this visit:',
+      markScheduled: 'Mark Scheduled',
+      confirmed: 'Confirmed',
+      vitalsTitle: 'Vital Signs: What Numbers to Watch',
+      lifestyleTitle: 'Food, Movement & Wound Care Guidelines',
+      dietRules: 'Dietary Rules & Fluid Limits:',
+      activityRules: 'Activity & Movement Limits:',
+      woundRules: 'Wound & Incision Care:',
+    },
+    hi: {
+      routineBadge: 'दैनिक दिनचर्या सूची',
+      routineTitle: 'दैनिक देखभाल चेकलिस्ट (Daily Care)',
+      progress: 'आज की प्रगति',
+      routineDesc: 'अपने स्वास्थ्य लाभ को स्थिर रखने के लिए इस आसान दिनचर्या का पालन करें। पूरा करने के बाद टिक करें:',
+      visitsBadge: 'डॉक्टर से मुलाक़ात',
+      visitsTitle: 'फॉलो-अप मुलाक़ातें और डॉक्टर से पूछने योग्य सवाल',
+      questionsToAsk: 'इस मुलाक़ात में डॉक्टर से क्या पूछें:',
+      markScheduled: 'तय करें',
+      confirmed: 'तय हो गया',
+      vitalsTitle: 'शारीरिक संकेत (वाइटल्स): किन आंकड़ों पर नजर रखें',
+      lifestyleTitle: 'खान-पान, गतिविधि और घाव की देखभाल',
+      dietRules: 'आहार और तरल पदार्थों के नियम:',
+      activityRules: 'गतिविधि और वजन उठाने के नियम:',
+      woundRules: 'घाव या चीरे की देखभाल:',
+    },
+    mr: {
+      routineBadge: 'दैनंदिन दिनचर्या',
+      routineTitle: 'दररोजची काळजी चेकलिस्ट (Daily Care)',
+      progress: 'आजची प्रगती',
+      routineDesc: 'लवकर बरे होण्यासाठी या सोप्या दिनचर्येचे पालन करा. काम पूर्ण झाल्यावर टिक करा:',
+      visitsBadge: 'डॉक्टरांची भेट',
+      visitsTitle: 'पुढील भेटी आणि डॉक्टरांना विचारायचे प्रश्न',
+      questionsToAsk: 'या भेटीत डॉक्टरांना काय विचारावे:',
+      markScheduled: 'वेळ ठरवा',
+      confirmed: 'निश्चित केले',
+      vitalsTitle: 'शारीरिक आकडेवारी: कोणत्या लक्षणांवर लक्ष ठेवावे',
+      lifestyleTitle: 'आहार, हालचाली आणि जखमेची काळजी',
+      dietRules: 'आहार आणि पाण्याच्या मर्यादा:',
+      activityRules: 'हालचाली आणि वजन उचलण्याचे नियम:',
+      woundRules: 'जखमेची स्वच्छता आणि काळजी:',
+    },
+  };
+
+  const t = translations[language] || translations.en;
 
   // Local state for interactive checkboxes
   const [completedDailyTasks, setCompletedDailyTasks] = useState<Record<number, boolean>>({});
@@ -61,10 +130,10 @@ export const DailyCareChecklist: React.FC<DailyCareChecklistProps> = ({ careData
               </div>
               <div>
                 <span className="text-xs font-bold text-teal-400 uppercase tracking-wider bg-teal-950/80 px-2 py-0.5 rounded border border-teal-800">
-                  Home Routine Checklist
+                  {t.routineBadge}
                 </span>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
-                  Daily Care Checklist
+                  {t.routineTitle}
                 </h2>
               </div>
             </div>
@@ -72,7 +141,7 @@ export const DailyCareChecklist: React.FC<DailyCareChecklistProps> = ({ careData
             {/* Progress Tracker */}
             <div className="bg-slate-800/90 px-4 py-2.5 rounded-xl border border-slate-700/80 min-w-[200px]">
               <div className="flex items-center justify-between text-xs mb-1.5">
-                <span className="text-slate-300 font-medium">Today's Progress</span>
+                <span className="text-slate-300 font-medium">{t.progress}</span>
                 <span className="text-teal-400 font-bold">{completedDailyCount} / {totalDailyTasks} ({progressPercent}%)</span>
               </div>
               <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
@@ -87,8 +156,7 @@ export const DailyCareChecklist: React.FC<DailyCareChecklistProps> = ({ careData
 
         <div className="p-6">
           <p className="text-sm text-slate-600 mb-5 leading-relaxed">
-            Follow this simple daily routine to keep your recovery steady and prevent complications.
-            Check off each step as you complete it during the day:
+            {t.routineDesc}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">

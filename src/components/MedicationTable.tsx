@@ -1,20 +1,108 @@
 import React, { useState } from 'react';
 import { Pill, AlertCircle, ShieldAlert, Check, Clock, Search, Filter, Sparkles } from 'lucide-react';
-import { MedicationItem } from '../types';
+import { MedicationItem, SupportedLanguage } from '../types';
 
 interface MedicationTableProps {
   medications: MedicationItem[];
+  language?: SupportedLanguage;
 }
 
-export const MedicationTable: React.FC<MedicationTableProps> = ({ medications }) => {
+export const MedicationTable: React.FC<MedicationTableProps> = ({ medications, language = 'en' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [takenStatus, setTakenStatus] = useState<Record<string, boolean>>({});
 
   if (!medications || medications.length === 0) return null;
 
+  // Language dictionary for headers and labels
+  const t = {
+    en: {
+      badge: 'Prescription Protocol',
+      subBadge: '100% Original Names Preserved',
+      title: 'Your Medication Schedule & Instructions',
+      warning: "Never change or stop dosages without your doctor's approval",
+      searchPlaceholder: 'Search medication, purpose, or rule...',
+      colDone: 'Done',
+      colName: 'Medicine Name (English Script)',
+      colTiming: 'Timing / Schedule',
+      colPurpose: 'Simple Purpose',
+      colInstructions: 'Special Instructions (Translated)',
+      criticalBadge: 'CRITICAL DOSE',
+      allCategory: 'ALL',
+      tip: 'Tip: You can check off each medicine above as you take it today.',
+      whyTake: 'Why you take this:',
+      schedule: 'Schedule:',
+      instructions: 'Instructions:',
+      showing: 'Showing',
+      of: 'of',
+      prescribedMeds: 'prescribed medications',
+    },
+    hi: {
+      badge: 'दवा निर्देश',
+      subBadge: 'दवाइयों के मूल नाम सुरक्षित',
+      title: 'आपकी दवाइयों का समय और निर्देश (Medication Schedule)',
+      warning: 'डॉक्टर की अनुमति के बिना कभी भी दवा की खुराक न बदलें या बंद न करें',
+      searchPlaceholder: 'दवा का नाम या उपयोग खोजें...',
+      colDone: 'लिया',
+      colName: 'दवा का नाम (English Script)',
+      colTiming: 'लेने का समय और खुराक',
+      colPurpose: 'दवा का आसान उपयोग (Purpose)',
+      colInstructions: 'विशेष सावधानियां और निर्देश',
+      criticalBadge: 'अति-महत्वपूर्ण दवा',
+      allCategory: 'सभी',
+      tip: 'सुझाव: आज खुराक लेने के बाद आप ऊपर दिए गए बॉक्स पर टिक कर सकते हैं।',
+      whyTake: 'यह दवा क्यों दी गई है:',
+      schedule: 'लेने का समय:',
+      instructions: 'जरूरी निर्देश:',
+      showing: 'दिखा रहे हैं',
+      of: 'कुल',
+      prescribedMeds: 'दवाइयाँ',
+    },
+    mr: {
+      badge: 'औषध सूचना',
+      subBadge: 'औषधांचे मूळ नाव सुरक्षित',
+      title: 'तुमच्या औषधांची वेळ आणि सूचना (Medication Schedule)',
+      warning: 'डॉक्टरांच्या सल्ल्याशिवाय औषधांची मात्रा बदलू नका किंवा बंद करू नका',
+      searchPlaceholder: 'औषधाचे नाव किंवा उपयोग शोधा...',
+      colDone: 'घेतले',
+      colName: 'औषधाचे नाव (English Script)',
+      colTiming: 'घेण्याची वेळ आणि प्रमाण',
+      colPurpose: 'औषधाचा सोपा उपयोग (Purpose)',
+      colInstructions: 'विशेष सूचना आणि काळजी',
+      criticalBadge: 'अत्यंत महत्त्वाचे औषध',
+      allCategory: 'सर्व',
+      tip: 'टीप: आज औषध घेतल्यानंतर तुम्ही वरील चौकटीत बरोबरची खूण करू शकता.',
+      whyTake: 'हे औषध का घ्यावे:',
+      schedule: 'घेण्याची वेळ:',
+      instructions: 'महत्त्वाच्या सूचना:',
+      showing: 'दाखवत आहे',
+      of: 'एकूण',
+      prescribedMeds: 'औषधे',
+    },
+  }[language] || {
+    badge: 'Prescription Protocol',
+    subBadge: '100% Original Names Preserved',
+    title: 'Your Medication Schedule & Instructions',
+    warning: "Never change or stop dosages without your doctor's approval",
+    searchPlaceholder: 'Search medication, purpose, or rule...',
+    colDone: 'Done',
+    colName: 'Medicine Name (English Script)',
+    colTiming: 'Timing / Schedule',
+    colPurpose: 'Simple Purpose',
+    colInstructions: 'Special Instructions (Translated)',
+    criticalBadge: 'CRITICAL DOSE',
+    allCategory: 'ALL',
+    tip: 'Tip: You can check off each medicine above as you take it today.',
+    whyTake: 'Why you take this:',
+    schedule: 'Schedule:',
+    instructions: 'Instructions:',
+    showing: 'Showing',
+    of: 'of',
+    prescribedMeds: 'prescribed medications',
+  };
+
   // Extract unique categories
-  const categories = ['ALL', ...Array.from(new Set(medications.map((m) => m.category || 'Other')))];
+  const categories = [t.allCategory, ...Array.from(new Set(medications.map((m) => m.category || 'Other')))];
 
   const filteredMeds = medications.filter((med) => {
     const matchesSearch =
@@ -23,7 +111,7 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
       med.specialInstructions.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesCategory =
-      selectedCategory === 'ALL' || (med.category || 'Other') === selectedCategory;
+      selectedCategory === t.allCategory || (med.category || 'Other') === selectedCategory;
 
     return matchesSearch && matchesCategory;
   });
@@ -47,21 +135,21 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
             <div>
               <div className="flex items-center space-x-2">
                 <span className="text-xs font-bold text-teal-400 uppercase tracking-wider bg-teal-950/80 px-2 py-0.5 rounded border border-teal-800">
-                  Prescription Protocol
+                  {t.badge}
                 </span>
                 <span className="text-xs text-slate-400 hidden sm:inline">
-                  100% Original Names Preserved
+                  {t.subBadge}
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
-                Your Medication Schedule & Instructions
+                {t.title}
               </h2>
             </div>
           </div>
 
           <div className="text-xs text-slate-300 bg-slate-800/80 px-3.5 py-2 rounded-xl border border-slate-700/80 flex items-center space-x-2">
             <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0" />
-            <span>Never change or stop dosages without your doctor's approval</span>
+            <span>{t.warning}</span>
           </div>
         </div>
 
@@ -71,7 +159,7 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search medication, purpose, or rule..."
+              placeholder={t.searchPlaceholder}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-slate-800/90 border border-slate-700 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
@@ -103,11 +191,11 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/90 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
-              <th className="py-3.5 px-4 w-12 text-center no-print">Done</th>
-              <th className="py-3.5 px-4 min-w-[200px]">Medicine Name (English Script)</th>
-              <th className="py-3.5 px-4 min-w-[190px]">Timing / Schedule</th>
-              <th className="py-3.5 px-4 min-w-[220px]">Simple Purpose</th>
-              <th className="py-3.5 px-4 min-w-[220px]">Special Instructions (Translated)</th>
+              <th className="py-3.5 px-4 w-12 text-center no-print">{t.colDone}</th>
+              <th className="py-3.5 px-4 min-w-[200px]">{t.colName}</th>
+              <th className="py-3.5 px-4 min-w-[190px]">{t.colTiming}</th>
+              <th className="py-3.5 px-4 min-w-[220px]">{t.colPurpose}</th>
+              <th className="py-3.5 px-4 min-w-[220px]">{t.colInstructions}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm">
@@ -116,6 +204,8 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
               const isCritical =
                 med.priority === 'CRITICAL' ||
                 med.specialInstructions.toLowerCase().includes('critical') ||
+                med.specialInstructions.includes('अति-महत्वपूर्ण') ||
+                med.specialInstructions.includes('अत्यंत महत्त्वाचे') ||
                 med.specialInstructions.toLowerCase().includes('do not stop');
 
               return (
@@ -158,7 +248,7 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
                       </span>
                       {isCritical && (
                         <span className="inline-flex items-center text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-red-100 text-red-800 border border-red-300">
-                          <AlertCircle className="w-3 h-3 mr-0.5" /> CRITICAL DOSE
+                          <AlertCircle className="w-3 h-3 mr-0.5" /> {t.criticalBadge}
                         </span>
                       )}
                     </div>
@@ -198,13 +288,15 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
         </table>
       </div>
 
-      {/* Mobile Card View (renders on small screens) */}
+      {/* Mobile Card View */}
       <div className="md:hidden divide-y divide-slate-200">
         {filteredMeds.map((med, idx) => {
           const isTaken = takenStatus[med.medicationName];
           const isCritical =
             med.priority === 'CRITICAL' ||
             med.specialInstructions.toLowerCase().includes('critical') ||
+            med.specialInstructions.includes('अति-महत्वपूर्ण') ||
+            med.specialInstructions.includes('अत्यंत महत्त्वाचे') ||
             med.specialInstructions.toLowerCase().includes('do not stop');
 
           return (
@@ -229,7 +321,7 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
                     </span>
                     {isCritical && (
                       <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-red-100 text-red-800">
-                        CRITICAL DOSE
+                        {t.criticalBadge}
                       </span>
                     )}
                   </div>
@@ -251,11 +343,11 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
               <div className="mt-3 space-y-2 text-xs">
                 <div className="flex items-start space-x-1.5 bg-teal-50 p-2 rounded-lg text-teal-900 font-semibold border border-teal-200">
                   <Clock className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
-                  <span><strong>Schedule:</strong> {med.timingFrequency}</span>
+                  <span><strong>{t.schedule}</strong> {med.timingFrequency}</span>
                 </div>
 
                 <div className="text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-200">
-                  <strong className="text-slate-900 block mb-0.5">Why you take this:</strong>
+                  <strong className="text-slate-900 block mb-0.5">{t.whyTake}</strong>
                   {med.purpose}
                 </div>
 
@@ -266,7 +358,7 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
                       : 'bg-slate-50 text-slate-700 border-slate-200'
                   }`}
                 >
-                  <strong className="block mb-0.5">Instructions:</strong>
+                  <strong className="block mb-0.5">{t.instructions}</strong>
                   {med.specialInstructions}
                 </div>
               </div>
@@ -283,10 +375,10 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
 
       {/* Footer reassurance */}
       <div className="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-500 gap-2">
-        <span>Showing {filteredMeds.length} of {medications.length} prescribed medications</span>
+        <span>{t.showing} {filteredMeds.length} {t.of} {medications.length} {t.prescribedMeds}</span>
         <span className="text-teal-700 font-medium flex items-center">
           <Sparkles className="w-3.5 h-3.5 mr-1 text-teal-600" />
-          Tip: You can check off each medicine above as you take it today.
+          {t.tip}
         </span>
       </div>
     </section>

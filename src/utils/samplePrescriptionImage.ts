@@ -48,7 +48,7 @@ export function getSamplePrescriptionImageDataUrl(): string {
     <rect x="40" y="720" width="720" height="150" fill="#fef2f2" stroke="#fca5a5" stroke-width="2" rx="8"/>
     <text x="60" y="750" font-size="15" font-weight="bold" fill="#991b1b">EMERGENCY RED FLAGS &amp; DIETARY RESTRICTIONS:</text>
     <text x="60" y="775" font-size="13" fill="#7f1d1d">• Sodium Limit: Maximum 2,000 mg (2 grams) daily. Fluid limit: 2.0 Liters daily.</text>
-    <text x="60" y="800" font-size="13" font-weight="bold" fill="#b91c1c">• CALL 911 FOR: Severe crushing chest pain, dyspnea at rest, syncope, or stroke signs.</text>
+    <text x="60" y="800" font-size="13" font-weight="bold" fill="#b91c1c">• EMERGENCY (108 / 112): Severe crushing chest pain, dyspnea at rest, syncope, or stroke signs.</text>
     <text x="60" y="825" font-size="13" fill="#7f1d1d">• Call Clinic (555-0144) for weight gain &gt; 2-3 lbs in 24 hours or bilateral ankle edema.</text>
     <text x="60" y="850" font-size="13" fill="#7f1d1d">• Follow-up visit: Dr. Elena Vance in 7 to 10 days.</text>
 

@@ -66,27 +66,11 @@ export const cardiacBackupResultEn: CareBridgeResult = {
       priority: "STANDARD"
     },
     {
-      medicationName: "Lisinopril 5 mg PO",
-      timingFrequency: "1 tablet once daily in the evening",
-      purpose: "ACE inhibitor that relaxes blood vessels and protects your heart muscle over time.",
-      specialInstructions: "Tell your doctor if you develop a persistent dry cough or dizziness.",
-      category: "Heart & Blood Pressure",
-      priority: "STANDARD"
-    },
-    {
       medicationName: "Atorvastatin (Lipitor) 80 mg PO",
       timingFrequency: "1 tablet once daily at bedtime",
       purpose: "Statin medicine that lowers bad cholesterol and stabilizes plaque in your heart arteries.",
       specialInstructions: "Avoid drinking grapefruit juice. Report any unusual unexplained muscle aches.",
       category: "Cholesterol",
-      priority: "STANDARD"
-    },
-    {
-      medicationName: "Potassium Chloride (K-Dur) 20 mEq PO",
-      timingFrequency: "1 tablet once daily in the morning with breakfast",
-      purpose: "Replaces potassium lost in your urine from your water pill (Lasix).",
-      specialInstructions: "Swallow whole with a full glass of water. Do not crush or chew.",
-      category: "Mineral Supplement",
       priority: "STANDARD"
     }
   ],
@@ -94,59 +78,31 @@ export const cardiacBackupResultEn: CareBridgeResult = {
     {
       warningSign: "Crushing, squeezing chest pain or heaviness radiating to your arm, neck, or jaw",
       whyItMatters: "Could indicate a sudden blockage or stent complication requiring immediate emergency treatment.",
-      action: "Call 911 immediately. Chew one 325 mg aspirin if told to do so by 911 dispatch. Do NOT drive yourself.",
-      urgency: "CALL_911_NOW"
+      action: "Call Emergency Ambulance (108 / 112) immediately. Do NOT drive yourself.",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
       warningSign: "Sudden severe shortness of breath, waking up gasping for air, or coughing pink frothy phlegm",
       whyItMatters: "Indicates rapid fluid flooding back into your lungs (pulmonary edema).",
-      action: "Sit upright, call 911 right away, and do not lie flat.",
-      urgency: "CALL_911_NOW"
-    },
-    {
-      warningSign: "Sudden weakness, facial drooping, confusion, or difficulty speaking",
-      whyItMatters: "Warning sign of stroke.",
-      action: "Call 911 immediately.",
-      urgency: "CALL_911_NOW"
+      action: "Sit upright, call emergency ambulance (108 / 112) right away.",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
       warningSign: "Rapid weight gain: 2 to 3 pounds in 24 hours or 5 pounds in a single week",
       whyItMatters: "Means your body is retaining water before you even notice swelling or breathing trouble.",
-      action: "Call your cardiology care team hotline today. Your water pill dose may need a safe adjustment.",
-      urgency: "CALL_DOCTOR_URGENT"
-    },
-    {
-      warningSign: "Increasing swelling in both ankles, feet, or belly, or needing extra pillows to sleep",
-      whyItMatters: "Early sign of heart fluid buildup.",
-      action: "Call your clinic within 24 hours.",
-      urgency: "CALL_DOCTOR_URGENT"
-    },
-    {
-      warningSign: "Unusual bleeding, dark black tarry stools, or large spontaneous bruises",
-      whyItMatters: "Can occur when taking dual blood thinners.",
-      action: "Contact your doctor immediately or visit urgent care.",
+      action: "Call your cardiology clinic hotline today for medicine adjustments.",
       urgency: "CALL_DOCTOR_URGENT"
     }
   ],
   dailyCareAndFollowUp: {
     appointments: [
       {
-        doctorOrClinic: "Dr. Elena Vance, Cardiology Clinic",
-        timeframeOrDate: "In 7 to 10 days (Clinic phone: 555-0144)",
-        purpose: "Check your heart rhythm, listen to your lungs, review blood pressure, and inspect stent recovery.",
+        doctorOrClinic: "Cardiology Clinic (Dr. Elena Vance)",
+        timeframeOrDate: "In 7 to 10 days",
+        purpose: "Check heart rhythm, inspect stent recovery, and review blood tests.",
         questionsToAsk: [
-          "Are my blood tests (kidney and potassium) in safe ranges?",
-          "When is it safe for me to start cardiac rehab exercise classes?",
-          "Can we verify all my current medication doses together?"
-        ]
-      },
-      {
-        doctorOrClinic: "Primary Care Physician (PCP)",
-        timeframeOrDate: "In 2 to 3 weeks",
-        purpose: "Review overall recovery, routine lab work, and coordinate long-term health maintenance.",
-        questionsToAsk: [
-          "Should I get my annual flu or pneumonia vaccine now?",
-          "Are my blood pressure readings at home looking target-perfect?"
+          "Are my kidney and potassium lab tests normal?",
+          "When is it safe to begin gentle walking exercises?"
         ]
       }
     ],
@@ -154,41 +110,30 @@ export const cardiacBackupResultEn: CareBridgeResult = {
       {
         task: "Step on the scale right after waking up and using the bathroom, before eating",
         timing: "Morning",
-        tip: "Wear similar light clothing each day and write the number in your CareBridge weight log."
+        tip: "Record the weight each morning in your care notebook."
       },
       {
-        task: "Take morning medications: Furosemide (Lasix), Aspirin, Ticagrelor, and Potassium with breakfast",
+        task: "Take morning medications (Lasix, Aspirin, Ticagrelor) with breakfast",
         timing: "Morning",
-        tip: "Keep pills organized in a 7-day pillbox to prevent double dosing or missed doses."
+        tip: "Use a pillbox to prevent missed or double doses."
       },
       {
-        task: "Take your morning blood pressure and heart rate sitting quietly for 5 minutes",
-        timing: "Morning",
-        tip: "Keep your arm supported at heart level while testing."
-      },
-      {
-        task: "Take a light 10-15 minute walk on flat ground if feeling steady",
-        timing: "Afternoon",
-        tip: "Stop and rest if you feel dizzy, winded, or tired. Walking gently speeds recovery."
-      },
-      {
-        task: "Take evening medications: Ticagrelor, Carvedilol (with dinner), and Atorvastatin (at bedtime)",
+        task: "Take evening medications (Ticagrelor, Carvedilol, Lipitor)",
         timing: "Evening",
-        tip: "Set an alarm on your phone so you never forget your evening heart medicines."
+        tip: "Take Carvedilol with your evening dinner to prevent dizziness."
       }
     ],
     lifestyleGuidelines: {
       dietaryRules: [
-        "Sodium restriction: Max 2,000 mg (about 1 teaspoon of table salt) daily across all meals.",
-        "Fluid limit: Do not drink more than 2,000 mL (approx. 64 oz / 8 cups) of total liquid per day.",
-        "Flavor foods using fresh herbs, lemon juice, garlic, and sodium-free spices instead of salt."
+        "Sodium restriction: Maximum 2,000 mg (about 1 teaspoon of table salt) daily.",
+        "Fluid limit: Do not drink more than 2,000 mL (approx. 8 cups) daily."
       ],
       activityAndRestrictions: [
-        "No lifting items over 10 lbs (like a heavy laundry basket or gallon of milk) for 7 days.",
-        "Do not drive for 48 hours after catheterization or while feeling drowsy or lightheaded."
+        "No lifting items heavier than 10 lbs for 7 days.",
+        "Do not drive for 48 hours after catheterization."
       ],
       woundOrIncisionCare: [
-        "Keep right femoral/radial puncture site clean and dry. Shower gently after 48 hours; do not soak in a tub or pool."
+        "Keep puncture site clean and dry. Shower gently after 48 hours."
       ]
     },
     vitalSignAlerts: [
@@ -196,11 +141,6 @@ export const cardiacBackupResultEn: CareBridgeResult = {
         vitalMetric: "Daily Morning Weight",
         alertThreshold: "Gain of 2 to 3 lbs in 24 hours OR 5 lbs in 1 week",
         actionRequired: "Call cardiology clinic right away; indicates fluid retention."
-      },
-      {
-        vitalMetric: "Systolic Blood Pressure (Top Number)",
-        alertThreshold: "Below 90 mmHg (with dizziness) OR above 160 mmHg",
-        actionRequired: "Sit down, rest for 10 minutes, recheck. If still out of range, call clinic."
       }
     ]
   },
@@ -210,95 +150,318 @@ export const cardiacBackupResultEn: CareBridgeResult = {
       plainDefinition: "A sudden flare-up where the heart can't pump fluid out fast enough, causing water to pool in the body."
     },
     {
-      term: "NSTEMI / Stent (PCI)",
-      plainDefinition: "A heart blockage opened using a tiny wire and a metal mesh tube to restore good blood flow."
-    },
-    {
-      term: "Diuretic (Water Pill)",
-      plainDefinition: "A medicine like Lasix that prompts kidneys to get rid of extra salt and fluid in urine."
+      term: "Stent (PCI)",
+      plainDefinition: "A small metal mesh tube placed in a narrowed artery to keep blood flowing smoothly."
     }
   ]
 };
 
+// FULL HINDI TRANSLATION (EVERY COLUMN IN HINDI, BRAND NAMES IN ENGLISH SCRIPT)
 export const cardiacBackupResultHi: CareBridgeResult = {
-  ...cardiacBackupResultEn,
+  patientGreeting: "घर वापसी पर हार्दिक स्वागत है, रॉबर्ट जी! आप अस्पताल से ठीक होकर आ चुके हैं। यहाँ आपकी हिंदी देखभाल मार्गदर्शिका है।",
+  simplifiedOverview: "आप अस्पताल में इसलिए भर्ती थे क्योंकि आपका दिल कमजोर हो गया था और बंद नस में एक छोटा स्टेंट (छल्ला) लगाया गया था। घर पर आपकी मुख्य दिनचर्या समय पर दवाइयां लेना, रोज सुबह वजन नापना और कम नमक का खाना खाना है।",
   targetLanguage: 'hi',
-  patientGreeting: "घर वापसी पर स्वागत है, रॉबर्ट जी! आप अस्पताल से ठीक होकर घर आ चुके हैं। यहाँ आपकी आसान भाषा में देखभाल गाइड है।",
-  simplifiedOverview: "आप अस्पताल में इसलिए भर्ती थे क्योंकि आपके दिल की पंपिंग कमजोर हो गई थी और खून की एक बंद नस में छोटा स्टेंट (छल्ला) लगाया गया था। घर पर आपकी मुख्य दिनचर्या समय पर दवाइयां लेना, रोज सुबह वजन नापना और कम नमक वाला खाना खाना है।",
   executiveSummary: {
-    hospitalStayReason: "आपको अस्पताल में भर्ती किया गया था क्योंकि आपका दिल सही तरीके से खून पंप नहीं कर पा रहा था, जिससे आपके फेफड़ों और पैरों में अतिरिक्त पानी भर रहा था और दिल की एक नस में रुकावट थी।",
-    conditionExplained: "हमारा दिल एक पानी के पंप जैसा है। जब यह कमजोर पड़ता है, तो शरीर में अतिरिक्त पानी जमा होने लगता है, जिससे सांस फूलती है। डॉक्टरों ने नस को खुला रखने के लिए एक छोटा स्टेंट लगाया और अतिरिक्त पानी निकालने की दवाइयाँ दीं।",
-    recoveryOverview: "घर पर अगले 2 से 3 हफ्तों तक आपका मुख्य लक्ष्य समय पर सभी दवाएं लेना, रोजाना सुबह वजन जांचना, भरपूर आराम करना और कम नमक वाला भोजन करना है।",
+    hospitalStayReason: "आपको अस्पताल में भर्ती किया गया था क्योंकि आपका दिल सही तरीके से खून पंप नहीं कर पा रहा था, जिससे फेफड़ों और पैरों में पानी भर रहा था और दिल की नस में रुकावट थी।",
+    conditionExplained: "हमारा दिल एक पानी के पंप जैसा है। जब यह कमजोर पड़ता है, तो शरीर में अतिरिक्त पानी जमा होने लगता है और सांस फूलती है। डॉक्टरों ने नस में स्टेंट लगाकर खून का दौरा सामान्य किया और पानी निकालने की दवाइयाँ दीं।",
+    recoveryOverview: "घर पर अगले 2 से 3 हफ्तों तक आपका मुख्य लक्ष्य समय पर सभी दवाएं लेना, रोज सुबह खाली पेट वजन जांचना, भरपूर आराम करना और कम नमक वाला भोजन करना है।",
     keyRules: [
-      "Ticagrelor (Brilinta) या Aspirin कभी भी डॉक्टर से पूछे बिना बंद न करें—यह आपके नए स्टेंट में खून के थक्के बनने से रोकती हैं।",
+      "Ticagrelor (Brilinta) या Aspirin कभी भी डॉक्टर से पूछे बिना बंद न करें—यह नए स्टेंट में खून के थक्के जमने से रोकती हैं।",
       "हर सुबह नाश्ते से पहले वजन नापें। अगर 24 घंटे में 1-1.5 किलो वजन बढ़े, तो तुरंत डॉक्टर को कॉल करें।",
       "दिनभर में नमक की मात्रा बहुत कम रखें (अधिकतम 1 छोटा चम्मच) और पानी/तरल पदार्थ 2 लीटर तक सीमित रखें।",
       "अगले 7 दिनों तक कोई भी भारी सामान (4-5 किलो से ज्यादा) न उठाएं।"
     ]
   },
+  primaryDiagnoses: [
+    {
+      clinicalTerm: "Acute Decompensated Heart Failure",
+      plainEnglish: "दिल की कमजोरी के कारण फेफड़ों और पैरों में पानी भरना",
+      whatItMeans: "आपके दिल को काम करने में अतिरिक्त सहारा चाहिए, ज्यादा नमक खाने से शरीर में पानी भर सकता है।"
+    },
+    {
+      clinicalTerm: "NSTEMI s/p LAD Stent (PCI)",
+      plainEnglish: "हार्ट अटैक के बाद नस में नया स्टेंट (छल्ला) लगाया गया",
+      whatItMeans: "दिल की एक मुख्य नस में 90% रुकावट थी, डॉक्टरों ने उसे खोलकर रक्त प्रवाह बहाल किया।"
+    }
+  ],
+  medications: [
+    {
+      medicationName: "Ticagrelor (Brilinta) 90 mg PO",
+      timingFrequency: "दिन में 2 बार 1 गोली (हर 12 घंटे पर, जैसे सुबह 8:00 और रात 8:00 बजे)",
+      purpose: "अति-महत्वपूर्ण खून पतला करने वाली दवा, जो आपके नए दिल के स्टेंट में जानलेवा थक्का जमने से रोकती है।",
+      specialInstructions: "अति-महत्वपूर्ण: दांत के इलाज के लिए भी डॉक्टर से पूछे बिना यह दवा एक दिन भी बंद न करें।",
+      category: "रक्त पतला करने वाली दवा",
+      priority: "CRITICAL"
+    },
+    {
+      medicationName: "Aspirin 81 mg PO",
+      timingFrequency: "रोजाना सुबह 1 गोली नाश्ते या खाने के साथ",
+      purpose: "खून को पतला रखती है और स्टेंट को खुला रखने में Brilinta के साथ मिलकर काम करती है।",
+      specialInstructions: "पेट में जलन से बचने के लिए हमेशा खाने या दूध के साथ लें।",
+      category: "रक्त पतला करने वाली दवा",
+      priority: "CRITICAL"
+    },
+    {
+      medicationName: "Furosemide (Lasix) 40 mg PO",
+      timingFrequency: "रोजाना सुबह 1 गोली (सुबह 8:00 बजे के आसपास लें)",
+      purpose: "शरीर से अतिरिक्त पानी और नमक पेशाब के रास्ते बाहर निकालती है ताकि सांस आसानी से आए।",
+      specialInstructions: "हमेशा सुबह लें ताकि रात में बार-बार पेशाब के लिए न उठना पड़े। रोज सुबह वजन जांचें।",
+      category: "पानी निकालने वाली दवा (Water Pill)",
+      priority: "STANDARD"
+    },
+    {
+      medicationName: "Carvedilol (Coreg) 6.25 mg PO",
+      timingFrequency: "दिन में 2 बार 1 गोली खाने के साथ (सुबह और रात के खाने पर)",
+      purpose: "दिल की धड़कन को नियंत्रित रखती है और दिल की मांसपेशियों पर दबाव कम करती है।",
+      specialInstructions: "चक्कर आने से बचने के लिए हमेशा खाने के साथ लें। लेटने या बैठने के बाद धीरे-धीरे खड़े हों।",
+      category: "ब्लड प्रेशर और हृदय दवा",
+      priority: "STANDARD"
+    },
+    {
+      medicationName: "Atorvastatin (Lipitor) 80 mg PO",
+      timingFrequency: "रोजाना रात को सोते समय 1 गोली",
+      purpose: "खराब कोलेस्ट्रॉल कम करती है और दिल की धमनियों में जमाव को रोकती है।",
+      specialInstructions: "अंगूर या चकोतरे (Grapefruit) का रस न पिएं। रात में सोने से पहले लें।",
+      category: "कोलेस्ट्रॉल नियंत्रक",
+      priority: "STANDARD"
+    }
+  ],
   emergencyRedFlags: [
     {
-      warningSign: "छाती में तेज दबाव, दर्द या जकड़न जो गर्दन, जबड़े या बाएं हाथ की तरफ फैले",
-      whyItMatters: "यह दिल की नस में दोबारा रुकावट का संकेत हो सकता है जिसके लिए तत्काल आपातकालीन इलाज चाहिए।",
-      action: "तुरंत 911 / 108 एम्बुलेंस बुलाएं। खुद गाड़ी चलाकर न जाएं।",
-      urgency: "CALL_911_NOW"
+      warningSign: "छाती में तेज दबाव, भारीपन या दर्द जो जबड़े, गर्दन या बाएं हाथ की ओर फैले",
+      whyItMatters: "यह दिल की नस में दोबारा रुकावट या आपातकालीन स्थिति का संकेत हो सकता है।",
+      action: "तुरंत आपातकालीन एम्बुलेंस (108 / 112) को कॉल करें। खुद वाहन चलाकर अस्पताल न जाएं।",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
-      warningSign: "अचानक बहुत तेज सांस फूलना, लेटने पर सांस न आना या गुलाबी झागदार खांसी आना",
-      whyItMatters: "यह फेफड़ों में तेजी से पानी भरने का संकेत है।",
-      action: "सीधे बैठ जाएं और तुरंत आपातकालीन एम्बुलेंस बुलाएं।",
-      urgency: "CALL_911_NOW"
+      warningSign: "अचानक बहुत तेज सांस फूलना, बिस्तर पर लेटते ही दम घुटना या खांसी आना",
+      whyItMatters: "यह फेफड़ों में तेजी से पानी भरने का गंभीर संकेत है।",
+      action: "तुरंत सीधे बैठ जाएं और आपातकालीन एम्बुलेंस (108 / 112) को कॉल करें।",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
-      warningSign: "24 घंटे में 1-1.5 किलो (2-3 पाउंड) या एक हफ्ते में 2.5 किलो वजन बढ़ना",
+      warningSign: "24 घंटे में 1 से 1.5 किलो (2-3 पाउंड) या हफ्ते में 2.5 किलो वजन अचानक बढ़ना",
       whyItMatters: "इसका मतलब है कि शरीर में पानी जमा हो रहा है।",
       action: "आज ही अपने हृदय रोग विशेषज्ञ (कार्डियोलॉजिस्ट) के क्लिनिक में फोन करें।",
       urgency: "CALL_DOCTOR_URGENT"
     }
+  ],
+  dailyCareAndFollowUp: {
+    appointments: [
+      {
+        doctorOrClinic: "कार्डियोलॉजी क्लिनिक (डॉ. एलेना वेंस)",
+        timeframeOrDate: "7 से 10 दिनों के अंदर",
+        purpose: "दिल की धड़कन, ब्लड प्रेशर और नए स्टेंट की जांच के लिए।",
+        questionsToAsk: [
+          "क्या मेरी किडनी और पोटेशियम की खून जांच सामान्य है?",
+          "मैं रोजाना टहलना कब से शुरू कर सकता हूँ?"
+        ]
+      }
+    ],
+    dailyChecklist: [
+      {
+        task: "सुबह उठकर शौच के बाद, बिना कुछ खाए सबसे पहले वजन नापें",
+        timing: "सुबह",
+        tip: "रोजाना एक जैसे हल्के कपड़े पहनकर वजन करें और डायरी में लिखें।"
+      },
+      {
+        task: "सुबह की दवाइयाँ (Lasix, Aspirin, Brilinta) नाश्ते के साथ लें",
+        timing: "सुबह",
+        tip: "दवा बॉक्स का इस्तेमाल करें ताकि खुराक छूटे नहीं।"
+      },
+      {
+        task: "रात की दवाइयाँ (Brilinta, Carvedilol, Atorvastatin) रात के भोजन के बाद लें",
+        timing: "शाम / रात",
+        tip: "समय पर लेने के लिए फोन में अलार्म लगाएं।"
+      }
+    ],
+    lifestyleGuidelines: {
+      dietaryRules: [
+        "नमक की सीमा: दिनभर में 1 छोटा चम्मच (2,000 mg) से ज्यादा नमक न खाएं।",
+        "तरल पदार्थ: पूरे दिन में पानी, चाय, सूप मिलाकर कुल 2 लीटर से ज्यादा न पिएं।"
+      ],
+      activityAndRestrictions: [
+        "अगले 7 दिनों तक 4-5 किलो से ज्यादा भारी सामान न उठाएं।",
+        "48 घंटे तक ड्राइविंग न करें।"
+      ],
+      woundOrIncisionCare: [
+        "जांघ या कलाई के घाव को सूखा और साफ रखें। 48 घंटे बाद हल्के से नहाएं।"
+      ]
+    },
+    vitalSignAlerts: [
+      {
+        vitalMetric: "रोजाना सुबह का वजन",
+        alertThreshold: "24 घंटे में 1 से 1.5 किलो या हफ्ते में 2.5 किलो वजन बढ़ना",
+        actionRequired: "तुरंत डॉक्टर के क्लिनिक में बताएं; यह शरीर में पानी रुकने का संकेत है।"
+      }
+    ]
+  },
+  medicalJargonGlossary: [
+    {
+      term: "हार्ट फेल्योर (Heart Failure)",
+      plainDefinition: "इसका मतलब दिल बंद होना नहीं है, बल्कि दिल की पंपिंग कमजोर होना है जिससे पानी रुकने लगता है।"
+    },
+    {
+      term: "स्टेंट (Stent)",
+      plainDefinition: "एक छोटी धातु की जालीदार नली जो बंद नस को खुला रखने के लिए अंदर लगाई जाती है।"
+    }
   ]
 };
 
+// FULL MARATHI TRANSLATION (EVERY COLUMN IN MARATHI, BRAND NAMES IN ENGLISH SCRIPT)
 export const cardiacBackupResultMr: CareBridgeResult = {
-  ...cardiacBackupResultEn,
+  patientGreeting: "घरी परत आल्याबद्दल हार्दिक स्वागत, रॉबर्ट जी! आपण बरे होत आहात. येथे आपल्यासाठी मराठीत काळजी मार्गदर्शिका आहे.",
+  simplifiedOverview: "तुमच्या हृदयाची पंप करण्याची क्षमता कमी झाली होती आणि एका बंद रक्तवाहिनीत लहान स्टेंट (छल्ला) बसवण्यात आला होता. घरी तुमची मुख्य दिनचर्या वेळेवर औषधे घेणे, रोज सकाळी वजन तपासणे आणि कमी मिठाचे जेवण घेणे ही आहे.",
   targetLanguage: 'mr',
-  patientGreeting: "घरी परत आल्याबद्दल स्वागत, रॉबर्ट जी! आपण बरे होत आहात. येथे आपल्यासाठी सोप्या भाषेतील काळजी मार्गदर्शक आहे.",
-  simplifiedOverview: "तुमच्या हृदयाची पंप करण्याची क्षमता कमी झाली होती आणि रक्ताच्या एका बंद नसमध्ये लहान स्टेंट (छल्ला) बसवण्यात आला होता. घरी तुमची मुख्य दिनचर्या वेळेवर औषधे घेणे, रोज सकाळी वजन तपासणे आणि कमी मिठाचे जेवण घेणे ही आहे.",
   executiveSummary: {
-    hospitalStayReason: "तुमचे हृदय योग्य प्रकारे रक्त पंप करू शकत नसल्यामुळे फुफ्फुसात आणि पायात पाणी साचले होते व हृदयाच्या नसमध्ये अडथळा निर्माण झाला होता, म्हणून तुम्हाला दाखल केले होते.",
-    conditionExplained: "आपले हृदय एका पाण्याच्या पंपासारखे असते. ते कमजोर झाले की शरीरात पाणी साचून धाप लागते. डॉक्टरांनी नस मोकळी राहण्यासाठी स्टेंट बसवला आणि जास्तीचे पाणी बाहेर काढण्यासाठी औषधे दिली.",
-    recoveryOverview: "पुढील २ ते ३ आठवडे सर्व औषधे वेळेवर घेणे, दररोज सकाळी वजन तपासणे, विश्रांती घेणे आणि कमी मिठाचे अन्न खाणे हे तुमचे मुख्य काम आहे.",
+    hospitalStayReason: "तुमचे हृदय योग्य प्रकारे रक्त पंप करू शकत नसल्यामुळे फुफ्फुसात आणि पायात पाणी साचले होते व हृदयाच्या रक्तवाहिनीत अडथळा निर्माण झाला होता, म्हणून तुम्हाला दाखल केले होते.",
+    conditionExplained: "आपले हृदय एका पाण्याच्या पंपासारखे असते. ते कमजोर झाले की शरीरात पाणी साचून धाप लागते. डॉक्टरांनी रक्तवाहिनी मोकळी राहण्यासाठी स्टेंट बसवला आणि जास्तीचे पाणी बाहेर काढण्यासाठी औषधे दिली.",
+    recoveryOverview: "पुढील २ ते ३ आठवडे सर्व औषधे वेळेवर घेणे, दररोज सकाळी उपाशीपोटी वजन तपासणे, विश्रांती घेणे आणि कमी मिठाचे अन्न खाणे हे तुमचे मुख्य काम आहे.",
     keyRules: [
-      "Ticagrelor (Brilinta) किंवा Aspirin डॉक्टरांना विचारल्याशिवाय कधीही बंद करू नका—हे स्टेंटमध्ये गुठळी होऊ नये म्हणून अत्यंत आवश्यक आहे.",
+      "Ticagrelor (Brilinta) किंवा Aspirin डॉक्टरांना विचारल्याशिवाय कधीही बंद करू नका—हे स्टेंटमध्ये रक्ताची गुठळी होऊ नये म्हणून अत्यंत आवश्यक आहे.",
       "दररोज सकाळी उपाशीपोटी वजन करा. २४ तासांत १ ते १.५ किलो वजन वाढल्यास त्वरित डॉक्टरांशी संपर्क साधा.",
-      "दिवसभरात मिठाचे प्रमाण अत्यंत कमी ठेवा आणि पाणी २ लिटरपर्यंत मर्यादित ठेवा.",
+      "दिवसभरात मिठाचे प्रमाण अत्यंत कमी ठेवा (१ लहान चमचा) आणि पाणी २ लिटरपर्यंत मर्यादित ठेवा.",
       "पुढील ७ दिवस कोणतेही जड सामान (४-५ किलोपेक्षा जास्त) उचलू नका."
     ]
   },
+  primaryDiagnoses: [
+    {
+      clinicalTerm: "Acute Decompensated Heart Failure",
+      plainEnglish: "हृदयाच्या कमकुवतपणामुळे शरीरात व फुफ्फुसात पाणी साचणे",
+      whatItMeans: "तुमच्या हृदयाला रक्ताभिसरणासाठी अतिरिक्त आधाराची गरज आहे, जास्त मीठ खाल्ल्यास पाणी साचू शकते."
+    },
+    {
+      clinicalTerm: "NSTEMI s/p LAD Stent (PCI)",
+      plainEnglish: "हार्ट अटॅकनंतर रक्तवाहिनीत स्टेंट (छल्ला) बसवला गेला",
+      whatItMeans: "हृदयाच्या मुख्य रक्तवाहिनीत ९०% अडथळा होता, डॉक्टरांनी तो उघडून रक्तप्रवाह सुरळीत केला."
+    }
+  ],
+  medications: [
+    {
+      medicationName: "Ticagrelor (Brilinta) 90 mg PO",
+      timingFrequency: "दिवसातून २ वेळा १ गोळी (दर १२ तासांनी, उदा. सकाळी ८:०० आणि रात्री ८:०० वाजता)",
+      purpose: "रक्त पातळ ठेवणारे अत्यंत महत्त्वाचे औषध, जे नवीन स्टेंटमध्ये रक्ताची जीवघेणी गुठळी होण्यापासून रोखते.",
+      specialInstructions: "अत्यंत महत्त्वाचे: दातांच्या उपचारासाठीही डॉक्टरांना विचारल्याशिवाय हे औषध एक दिवसही बंद करू नका.",
+      category: "रक्त पातळ करणारे औषध",
+      priority: "CRITICAL"
+    },
+    {
+      medicationName: "Aspirin 81 mg PO",
+      timingFrequency: "दररोज सकाळी १ गोळी नाश्त्यासोबत किंवा जेवणानंतर",
+      purpose: "रक्त पातळ ठेवते आणि स्टेंट मोकळा ठेवण्यासाठी Brilinta सोबत काम करते.",
+      specialInstructions: "पोटाची जळजळ टाळण्यासाठी नेहमी अन्नासोबत किंवा दुधासोबत घ्या.",
+      category: "रक्त पातळ करणारे औषध",
+      priority: "CRITICAL"
+    },
+    {
+      medicationName: "Furosemide (Lasix) 40 mg PO",
+      timingFrequency: "दररोज सकाळी १ गोळी (सकाळी ८:०० च्या सुमारास घ्या)",
+      purpose: "शरीरातील जास्तीचे पाणी व मीठ लघवीवाटे बाहेर काढते, ज्यामुळे श्वास घेणे सोपे होते.",
+      specialInstructions: "नेहमी सकाळी घ्या जेणेकरून रात्री लघवीसाठी वारंवार उठावे लागणार नाही. रोज सकाळी वजन तपासा.",
+      category: "पाणी काढणारे औषध (Water Pill)",
+      priority: "STANDARD"
+    },
+    {
+      medicationName: "Carvedilol (Coreg) 6.25 mg PO",
+      timingFrequency: "दिवसातून २ वेळा १ गोळी जेवणासोबत (सकाळी आणि रात्रीच्या जेवणात)",
+      purpose: "हृदयाचे ठोके नियंत्रणात ठेवते आणि हृदयाच्या स्नायूंवरचा ताण कमी करते.",
+      specialInstructions: "चक्कर येणे टाळण्यासाठी नेहमी जेवणासोबत घ्या. झोपेतून किंवा बसल्यावरून हळूच उठा.",
+      category: "रक्तदाब आणि हृदय औषध",
+      priority: "STANDARD"
+    },
+    {
+      medicationName: "Atorvastatin (Lipitor) 80 mg PO",
+      timingFrequency: "दररोज रात्री झोपताना १ गोळी",
+      purpose: "खराब कोलेस्टेरॉल कमी करते आणि हृदयाच्या रक्तवाहिन्यांमध्ये चरबी साचू देत नाही.",
+      specialInstructions: "ग्रेपफ्रूट (मोसंबीसारखे फळ) चा रस पिऊ नका. रात्री झोपताना घ्या.",
+      category: "कोलेस्टेरॉल नियंत्रक",
+      priority: "STANDARD"
+    }
+  ],
   emergencyRedFlags: [
     {
       warningSign: "छातीत असह्य वेदना, जडपणा किंवा जबड्याकडे व डाव्या हाताकडे पसरणाऱ्या कळा",
       whyItMatters: "हे हृदयाच्या रक्तवाहिनीत पुन्हा अडथळा आल्याचे लक्षण असू शकते.",
-      action: "त्वरित रुग्णवाहिका (१०८ / ९११) बोलवा. स्वतः वाहन चालवून जाऊ नका.",
-      urgency: "CALL_911_NOW"
+      action: "त्वरित रुग्णवाहिका (१०८ / ११२) बोलवा. स्वतः वाहन चालवून जाऊ नका.",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
-      warningSign: "अचानक तीव्र धाप लागणे, झोपताना श्वास गुदमरणे",
-      whyItMatters: "फुफ्फुसात पाणी साचल्याचे हे धोक्याचे लक्षण आहे.",
-      action: "ताठ बसा आणि त्वरित वैद्यकीय मदत मिळवा.",
-      urgency: "CALL_911_NOW"
+      warningSign: "अचानक तीव्र धाप लागणे, झोपताना श्वास गुदमरणे किंवा गुलाबी रंगाचा कफ येणे",
+      whyItMatters: "फुफ्फुसात वेगाने पाणी साचल्याचे हे गंभीर लक्षण आहे.",
+      action: "ताठ बसा आणि त्वरित रुग्णवाहिका (१०८ / ११२) बोलवा.",
+      urgency: "CALL_EMERGENCY_NOW"
     },
     {
-      warningSign: "२४ तासांत १ ते १.५ किलो वजन अचानक वाढणे",
+      warningSign: "२४ तासांत १ ते १.५ किलो किंवा एका आठवड्यात २.५ किलो वजन अचानक वाढणे",
       whyItMatters: "शरीरात अनावश्यक पाणी साचत असल्याचे हे प्राथमिक लक्षण आहे.",
       action: "आजच तुमच्या डॉक्टरांच्या क्लिनिकला फोन करा.",
       urgency: "CALL_DOCTOR_URGENT"
+    }
+  ],
+  dailyCareAndFollowUp: {
+    appointments: [
+      {
+        doctorOrClinic: "हृदयविकार क्लिनिक (डॉ. एलेना वेंस)",
+        timeframeOrDate: "७ ते १० दिवसांच्या आत",
+        purpose: "हृदयाचे ठोके, रक्तदाब आणि स्टेंटची तपासणी करण्यासाठी.",
+        questionsToAsk: [
+          "माझे किडनी आणि पोटॅशियम रक्त तपासणी अहवाल सामान्य आहेत का?",
+          "मी हलका व्यायाम किंवा चालणे कधीपासून सुरू करू शकतो?"
+        ]
+      }
+    ],
+    dailyChecklist: [
+      {
+        task: "सकाळी उठल्यावर शौचानंतर उपाशीपोटी सर्वात आधी वजन करा",
+        timing: "सकाळ",
+        tip: "दररोज सारखेच हलके कपडे घालून वजन करा आणि वहीत लिहून ठेवा."
+      },
+      {
+        task: "सकाळची औषधे (Lasix, Aspirin, Brilinta) नाश्त्यासोबत घ्या",
+        timing: "सकाळ",
+        tip: "डोस चुकणार नाही यासाठी गोळ्यांच्या डब्याचा वापर करा."
+      },
+      {
+        task: "रात्रीची औषधे (Brilinta, Carvedilol, Atorvastatin) जेवणानंतर घ्या",
+        timing: "संध्याकाळ / रात्र",
+        tip: "वेळेवर घेण्यासाठी फोनमध्ये गजर (अलार्म) लावा."
+      }
+    ],
+    lifestyleGuidelines: {
+      dietaryRules: [
+        "मिठाची मर्यादा: दिवसभरात १ लहान चमच्यापेक्षा (२,००० मिलीग्रॅम) जास्त मीठ खाऊ नका.",
+        "द्रवपदार्थ: दिवसभरात पाणी, चहा, सूप सर्व मिळून २ लिटरपेक्षा जास्त पिऊ नका."
+      ],
+      activityAndRestrictions: [
+        "पुढील ७ दिवस ४-५ किलोपेक्षा जास्त जड सामान उचलू नका.",
+        "४८ तास वाहन चालवू नका."
+      ],
+      woundOrIncisionCare: [
+        "मांडीवरील किंवा मनगटावरील जखम कोरडी व स्वच्छ ठेवा. ४८ तासांनंतर हलकी आंघोळ करा."
+      ]
+    },
+    vitalSignAlerts: [
+      {
+        vitalMetric: "दररोज सकाळचे वजन",
+        alertThreshold: "२४ तासांत १ ते १.५ किलो वजन वाढणे",
+        actionRequired: "त्वरित डॉक्टरांना कळवा; हे शरीरात पाणी साचण्याचे लक्षण आहे."
+      }
+    ]
+  },
+  medicalJargonGlossary: [
+    {
+      term: "हार्ट फेल्युअर (Heart Failure)",
+      plainDefinition: "याचा अर्थ हृदय थांबणे असा नाही, तर हृदयाची पंप करण्याची ताकद कमी होणे असा आहे."
+    },
+    {
+      term: "स्टेंट (Stent)",
+      plainDefinition: "रक्तवाहिनीतील अडथळा दूर करून ती मोकळी ठेवण्यासाठी बसवलेली धातूची लहान जाळीदार नळी."
     }
   ]
 };
 
 export const cardiacBackupResult = cardiacBackupResultEn;
 
-// Realistic clinical note text
 export const sampleCardiacText = `HOSPITAL DISCHARGE SUMMARY
 PATIENT NAME: Robert Jenkins | MRN: 9482014 | AGE: 68 | GENDER: M
 ADMISSION DATE: 10/18/2026 | DISCHARGE DATE: 10/22/2026
@@ -319,9 +482,7 @@ DISCHARGE MEDICATIONS:
 2. Aspirin 81 mg PO daily with meals.
 3. Furosemide (Lasix) 40 mg PO QAM. (Take in morning. Urination will increase. Monitor daily weight.)
 4. Carvedilol (Coreg) 6.25 mg PO BID with food. (Titrate upward at next clinic visit if tolerated.)
-5. Lisinopril 5 mg PO daily at bedtime.
-6. Atorvastatin (Lipitor) 80 mg PO QHS.
-7. Potassium Chloride (K-Dur) 20 mEq PO daily with morning meal.
+5. Atorvastatin (Lipitor) 80 mg PO QHS.
 
 ACTIVITY & DIETARY INSTRUCTIONS:
 - 2.0 gram (2,000 mg) sodium restriction per day.
@@ -331,12 +492,11 @@ ACTIVITY & DIETARY INSTRUCTIONS:
 - No driving for 48 hours. Light walking encouraged.
 
 FOLLOW-UP CARE:
-- Cardiology Clinic: Dr. Elena Vance in 7-10 days (Phone: 555-0144). Bring medication bottles and weight log.
-- Primary Care: Dr. Marcus Sterling in 14-21 days for comprehensive metabolic panel and renal function review.
-- Cardiac Rehabilitation: Referral submitted for phase II outpatient rehab in 3-4 weeks.
+- Cardiology Clinic: Dr. Elena Vance in 7-10 days. Bring medication bottles and weight log.
+- Primary Care: Dr. Marcus Sterling in 14-21 days for comprehensive metabolic panel.
 
 WARNING SIGNS / RED FLAGS:
-Instructed on emergency symptoms. Call 911 for: Acute recurrent chest pressure, diaphoresis, dyspnea at rest, syncope, or signs of stroke. Call clinic immediately for: Weight gain >3 lbs in 24 hours or >5 lbs in 1 week, worsening orthopnea, swelling in lower extremities, or abnormal bleeding.`;
+Instructed on emergency symptoms. Call Emergency Ambulance (108 / 112) for: Acute recurrent chest pressure, diaphoresis, dyspnea at rest, syncope, or signs of stroke. Call clinic immediately for: Weight gain >3 lbs in 24 hours or >5 lbs in 1 week, worsening orthopnea, swelling in lower extremities, or abnormal bleeding.`;
 
 export const sampleNotes: SampleNote[] = [
   {

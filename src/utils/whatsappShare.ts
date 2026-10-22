@@ -14,7 +14,7 @@ export function generateWhatsAppCaregiverDigest(data: CareBridgeResult): string 
     title = "🏥 *केयरब्रिज AI - मरीज देखभाल सारांश (CareBridge Summary)*";
     overviewHeader = "*📋 परिजनों और देखभालकर्ताओं के लिए संक्षिप्त विवरण:*";
     medsHeader = "*💊 रोजाना की दवाइयाँ और समय:*";
-    redFlagsHeader = "*🚨 आपातकालीन चेतावनी संकेत (तुरंत डॉक्टर या 108/911 को बताएं):*";
+    redFlagsHeader = "*🚨 आपातकालीन चेतावनी संकेत (तुरंत डॉक्टर या 108 / 112 को बताएं):*";
     apptsHeader = "*📅 डॉक्टर से अगली मुलाक़ात:*";
     safetyNotice = "⚠️ *महत्वपूर्ण:* डॉक्टर से पूछे बिना किसी भी दवा की खुराक न बदलें।";
   } else if (lang === 'mr') {
