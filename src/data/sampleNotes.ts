@@ -1,7 +1,9 @@
 import { SampleNote, CareBridgeResult } from '../types';
 
-export const cardiacBackupResult: CareBridgeResult = {
+export const cardiacBackupResultEn: CareBridgeResult = {
   patientGreeting: "Welcome home, Robert! You are recovering well from your hospital stay. Here is your personalized, easy-to-read care guide.",
+  simplifiedOverview: "You were in the hospital because your heart pump had weakened and a blocked artery needed a small stent tube to restore healthy blood flow. At home, your primary routine is taking your heart medicines on time, weighing yourself every morning, and eating low-salt meals.",
+  targetLanguage: 'en',
   executiveSummary: {
     hospitalStayReason: "You were admitted to the hospital because your heart was having trouble pumping blood efficiently, which caused extra fluid to back up into your lungs and legs, and one of your heart's blood vessels was narrowed.",
     conditionExplained: "Your heart is like a water pump. When it gets weakened or overworked, extra fluid pools in your body (congestion), making you feel short of breath and tired. Doctors placed a small hollow mesh tube (stent) to keep blood flowing smoothly through your heart vessel, and gave you medications to remove extra water.",
@@ -90,7 +92,7 @@ export const cardiacBackupResult: CareBridgeResult = {
   ],
   emergencyRedFlags: [
     {
-      warningSign: "Crushing, squeezing chest pain or heaviness that radiates to your arm, neck, or jaw",
+      warningSign: "Crushing, squeezing chest pain or heaviness radiating to your arm, neck, or jaw",
       whyItMatters: "Could indicate a sudden blockage or stent complication requiring immediate emergency treatment.",
       action: "Call 911 immediately. Chew one 325 mg aspirin if told to do so by 911 dispatch. Do NOT drive yourself.",
       urgency: "CALL_911_NOW"
@@ -146,15 +148,6 @@ export const cardiacBackupResult: CareBridgeResult = {
           "Should I get my annual flu or pneumonia vaccine now?",
           "Are my blood pressure readings at home looking target-perfect?"
         ]
-      },
-      {
-        doctorOrClinic: "Outpatient Cardiac Rehabilitation Program",
-        timeframeOrDate: "Intake evaluation in 3 to 4 weeks",
-        purpose: "Supervised exercise and education to strengthen your heart safely.",
-        questionsToAsk: [
-          "What days and times are best for my schedule?",
-          "What type of comfortable shoes should I bring?"
-        ]
       }
     ],
     dailyChecklist: [
@@ -182,28 +175,20 @@ export const cardiacBackupResult: CareBridgeResult = {
         task: "Take evening medications: Ticagrelor, Carvedilol (with dinner), and Atorvastatin (at bedtime)",
         timing: "Evening",
         tip: "Set an alarm on your phone so you never forget your evening heart medicines."
-      },
-      {
-        task: "Check your ankles and shins for fluid indentations (swelling)",
-        timing: "Evening",
-        tip: "Gently press your thumb against your shinbone for 5 seconds. If a dent stays, note it down."
       }
     ],
     lifestyleGuidelines: {
       dietaryRules: [
         "Sodium restriction: Max 2,000 mg (about 1 teaspoon of table salt) daily across all meals.",
-        "Check nutrition labels on canned soups, deli meats, and frozen dinners—aim for <140mg per serving.",
         "Fluid limit: Do not drink more than 2,000 mL (approx. 64 oz / 8 cups) of total liquid per day.",
         "Flavor foods using fresh herbs, lemon juice, garlic, and sodium-free spices instead of salt."
       ],
       activityAndRestrictions: [
         "No lifting items over 10 lbs (like a heavy laundry basket or gallon of milk) for 7 days.",
-        "Avoid strenuous push-up exercises or vigorous yard work until cleared by Dr. Vance.",
         "Do not drive for 48 hours after catheterization or while feeling drowsy or lightheaded."
       ],
       woundOrIncisionCare: [
-        "Keep right femoral/radial puncture site clean and dry. Shower gently after 48 hours; do not soak in a tub or pool.",
-        "Inspect site daily for expanding redness, warmth, swelling, or drainage. A small dime-sized bruise is normal."
+        "Keep right femoral/radial puncture site clean and dry. Shower gently after 48 hours; do not soak in a tub or pool."
       ]
     },
     vitalSignAlerts: [
@@ -216,11 +201,6 @@ export const cardiacBackupResult: CareBridgeResult = {
         vitalMetric: "Systolic Blood Pressure (Top Number)",
         alertThreshold: "Below 90 mmHg (with dizziness) OR above 160 mmHg",
         actionRequired: "Sit down, rest for 10 minutes, recheck. If still out of range, call clinic."
-      },
-      {
-        vitalMetric: "Resting Heart Rate",
-        alertThreshold: "Below 50 bpm (feeling dizzy) OR consistently above 100 bpm at rest",
-        actionRequired: "Rest and notify your doctor."
       }
     ]
   },
@@ -230,45 +210,96 @@ export const cardiacBackupResult: CareBridgeResult = {
       plainDefinition: "A sudden flare-up where the heart can't pump fluid out fast enough, causing water to pool in the body."
     },
     {
-      term: "NSTEMI / Myocardial Infarction",
-      plainDefinition: "A heart attack caused by a partial or temporary blockage of blood flow to part of the heart muscle."
-    },
-    {
-      term: "PCI (Percutaneous Coronary Intervention)",
-      plainDefinition: "A minimally invasive procedure where doctors guide a tiny wire into the heart to open a blocked vessel."
-    },
-    {
-      term: "Drug-Eluting Stent (DES)",
-      plainDefinition: "A small metal mesh tube coated with medication that stays inside your artery to keep it wide open."
+      term: "NSTEMI / Stent (PCI)",
+      plainDefinition: "A heart blockage opened using a tiny wire and a metal mesh tube to restore good blood flow."
     },
     {
       term: "Diuretic (Water Pill)",
-      plainDefinition: "A medicine like Lasix that prompts your kidneys to get rid of extra salt and water through urine."
-    },
-    {
-      term: "Dyspnea & Orthopnea",
-      plainDefinition: "Medical words for shortness of breath, especially when lying flat in bed."
-    },
-    {
-      term: "Bilateral Pitting Edema",
-      plainDefinition: "Swelling in both feet or ankles that leaves a temporary small dent when pressed."
-    },
-    {
-      term: "PO, BID, QAM, QHS",
-      plainDefinition: "Doctor shorthand: PO = by mouth, BID = twice a day, QAM = every morning, QHS = every night at bedtime."
+      plainDefinition: "A medicine like Lasix that prompts kidneys to get rid of extra salt and fluid in urine."
     }
   ]
 };
 
-export const sampleNotes: SampleNote[] = [
-  {
-    id: "cardiac-chf",
-    title: "Cardiac Discharge Note (CHF & Stent)",
-    shortDesc: "68yo male s/p NSTEMI, acute decompensated heart failure & drug-eluting stent to LAD.",
-    icon: "HeartPulse",
-    badge: "Recommended Sample",
-    precomputedResult: cardiacBackupResult,
-    text: `HOSPITAL DISCHARGE SUMMARY
+export const cardiacBackupResultHi: CareBridgeResult = {
+  ...cardiacBackupResultEn,
+  targetLanguage: 'hi',
+  patientGreeting: "घर वापसी पर स्वागत है, रॉबर्ट जी! आप अस्पताल से ठीक होकर घर आ चुके हैं। यहाँ आपकी आसान भाषा में देखभाल गाइड है।",
+  simplifiedOverview: "आप अस्पताल में इसलिए भर्ती थे क्योंकि आपके दिल की पंपिंग कमजोर हो गई थी और खून की एक बंद नस में छोटा स्टेंट (छल्ला) लगाया गया था। घर पर आपकी मुख्य दिनचर्या समय पर दवाइयां लेना, रोज सुबह वजन नापना और कम नमक वाला खाना खाना है।",
+  executiveSummary: {
+    hospitalStayReason: "आपको अस्पताल में भर्ती किया गया था क्योंकि आपका दिल सही तरीके से खून पंप नहीं कर पा रहा था, जिससे आपके फेफड़ों और पैरों में अतिरिक्त पानी भर रहा था और दिल की एक नस में रुकावट थी।",
+    conditionExplained: "हमारा दिल एक पानी के पंप जैसा है। जब यह कमजोर पड़ता है, तो शरीर में अतिरिक्त पानी जमा होने लगता है, जिससे सांस फूलती है। डॉक्टरों ने नस को खुला रखने के लिए एक छोटा स्टेंट लगाया और अतिरिक्त पानी निकालने की दवाइयाँ दीं।",
+    recoveryOverview: "घर पर अगले 2 से 3 हफ्तों तक आपका मुख्य लक्ष्य समय पर सभी दवाएं लेना, रोजाना सुबह वजन जांचना, भरपूर आराम करना और कम नमक वाला भोजन करना है।",
+    keyRules: [
+      "Ticagrelor (Brilinta) या Aspirin कभी भी डॉक्टर से पूछे बिना बंद न करें—यह आपके नए स्टेंट में खून के थक्के बनने से रोकती हैं।",
+      "हर सुबह नाश्ते से पहले वजन नापें। अगर 24 घंटे में 1-1.5 किलो वजन बढ़े, तो तुरंत डॉक्टर को कॉल करें।",
+      "दिनभर में नमक की मात्रा बहुत कम रखें (अधिकतम 1 छोटा चम्मच) और पानी/तरल पदार्थ 2 लीटर तक सीमित रखें।",
+      "अगले 7 दिनों तक कोई भी भारी सामान (4-5 किलो से ज्यादा) न उठाएं।"
+    ]
+  },
+  emergencyRedFlags: [
+    {
+      warningSign: "छाती में तेज दबाव, दर्द या जकड़न जो गर्दन, जबड़े या बाएं हाथ की तरफ फैले",
+      whyItMatters: "यह दिल की नस में दोबारा रुकावट का संकेत हो सकता है जिसके लिए तत्काल आपातकालीन इलाज चाहिए।",
+      action: "तुरंत 911 / 108 एम्बुलेंस बुलाएं। खुद गाड़ी चलाकर न जाएं।",
+      urgency: "CALL_911_NOW"
+    },
+    {
+      warningSign: "अचानक बहुत तेज सांस फूलना, लेटने पर सांस न आना या गुलाबी झागदार खांसी आना",
+      whyItMatters: "यह फेफड़ों में तेजी से पानी भरने का संकेत है।",
+      action: "सीधे बैठ जाएं और तुरंत आपातकालीन एम्बुलेंस बुलाएं।",
+      urgency: "CALL_911_NOW"
+    },
+    {
+      warningSign: "24 घंटे में 1-1.5 किलो (2-3 पाउंड) या एक हफ्ते में 2.5 किलो वजन बढ़ना",
+      whyItMatters: "इसका मतलब है कि शरीर में पानी जमा हो रहा है।",
+      action: "आज ही अपने हृदय रोग विशेषज्ञ (कार्डियोलॉजिस्ट) के क्लिनिक में फोन करें।",
+      urgency: "CALL_DOCTOR_URGENT"
+    }
+  ]
+};
+
+export const cardiacBackupResultMr: CareBridgeResult = {
+  ...cardiacBackupResultEn,
+  targetLanguage: 'mr',
+  patientGreeting: "घरी परत आल्याबद्दल स्वागत, रॉबर्ट जी! आपण बरे होत आहात. येथे आपल्यासाठी सोप्या भाषेतील काळजी मार्गदर्शक आहे.",
+  simplifiedOverview: "तुमच्या हृदयाची पंप करण्याची क्षमता कमी झाली होती आणि रक्ताच्या एका बंद नसमध्ये लहान स्टेंट (छल्ला) बसवण्यात आला होता. घरी तुमची मुख्य दिनचर्या वेळेवर औषधे घेणे, रोज सकाळी वजन तपासणे आणि कमी मिठाचे जेवण घेणे ही आहे.",
+  executiveSummary: {
+    hospitalStayReason: "तुमचे हृदय योग्य प्रकारे रक्त पंप करू शकत नसल्यामुळे फुफ्फुसात आणि पायात पाणी साचले होते व हृदयाच्या नसमध्ये अडथळा निर्माण झाला होता, म्हणून तुम्हाला दाखल केले होते.",
+    conditionExplained: "आपले हृदय एका पाण्याच्या पंपासारखे असते. ते कमजोर झाले की शरीरात पाणी साचून धाप लागते. डॉक्टरांनी नस मोकळी राहण्यासाठी स्टेंट बसवला आणि जास्तीचे पाणी बाहेर काढण्यासाठी औषधे दिली.",
+    recoveryOverview: "पुढील २ ते ३ आठवडे सर्व औषधे वेळेवर घेणे, दररोज सकाळी वजन तपासणे, विश्रांती घेणे आणि कमी मिठाचे अन्न खाणे हे तुमचे मुख्य काम आहे.",
+    keyRules: [
+      "Ticagrelor (Brilinta) किंवा Aspirin डॉक्टरांना विचारल्याशिवाय कधीही बंद करू नका—हे स्टेंटमध्ये गुठळी होऊ नये म्हणून अत्यंत आवश्यक आहे.",
+      "दररोज सकाळी उपाशीपोटी वजन करा. २४ तासांत १ ते १.५ किलो वजन वाढल्यास त्वरित डॉक्टरांशी संपर्क साधा.",
+      "दिवसभरात मिठाचे प्रमाण अत्यंत कमी ठेवा आणि पाणी २ लिटरपर्यंत मर्यादित ठेवा.",
+      "पुढील ७ दिवस कोणतेही जड सामान (४-५ किलोपेक्षा जास्त) उचलू नका."
+    ]
+  },
+  emergencyRedFlags: [
+    {
+      warningSign: "छातीत असह्य वेदना, जडपणा किंवा जबड्याकडे व डाव्या हाताकडे पसरणाऱ्या कळा",
+      whyItMatters: "हे हृदयाच्या रक्तवाहिनीत पुन्हा अडथळा आल्याचे लक्षण असू शकते.",
+      action: "त्वरित रुग्णवाहिका (१०८ / ९११) बोलवा. स्वतः वाहन चालवून जाऊ नका.",
+      urgency: "CALL_911_NOW"
+    },
+    {
+      warningSign: "अचानक तीव्र धाप लागणे, झोपताना श्वास गुदमरणे",
+      whyItMatters: "फुफ्फुसात पाणी साचल्याचे हे धोक्याचे लक्षण आहे.",
+      action: "ताठ बसा आणि त्वरित वैद्यकीय मदत मिळवा.",
+      urgency: "CALL_911_NOW"
+    },
+    {
+      warningSign: "२४ तासांत १ ते १.५ किलो वजन अचानक वाढणे",
+      whyItMatters: "शरीरात अनावश्यक पाणी साचत असल्याचे हे प्राथमिक लक्षण आहे.",
+      action: "आजच तुमच्या डॉक्टरांच्या क्लिनिकला फोन करा.",
+      urgency: "CALL_DOCTOR_URGENT"
+    }
+  ]
+};
+
+export const cardiacBackupResult = cardiacBackupResultEn;
+
+// Realistic clinical note text
+export const sampleCardiacText = `HOSPITAL DISCHARGE SUMMARY
 PATIENT NAME: Robert Jenkins | MRN: 9482014 | AGE: 68 | GENDER: M
 ADMISSION DATE: 10/18/2026 | DISCHARGE DATE: 10/22/2026
 ATTENDING PHYSICIAN: Dr. Elena Vance, MD (Cardiology)
@@ -305,86 +336,16 @@ FOLLOW-UP CARE:
 - Cardiac Rehabilitation: Referral submitted for phase II outpatient rehab in 3-4 weeks.
 
 WARNING SIGNS / RED FLAGS:
-Instructed on emergency symptoms. Call 911 for: Acute recurrent chest pressure, diaphoresis, dyspnea at rest, syncope, or signs of stroke. Call clinic immediately for: Weight gain >3 lbs in 24 hours or >5 lbs in 1 week, worsening orthopnea, swelling in lower extremities, or abnormal bleeding.`
-  },
+Instructed on emergency symptoms. Call 911 for: Acute recurrent chest pressure, diaphoresis, dyspnea at rest, syncope, or signs of stroke. Call clinic immediately for: Weight gain >3 lbs in 24 hours or >5 lbs in 1 week, worsening orthopnea, swelling in lower extremities, or abnormal bleeding.`;
+
+export const sampleNotes: SampleNote[] = [
   {
-    id: "ortho-knee",
-    title: "Post-Operative Orthopedic Note (Knee Replacement)",
-    shortDesc: "62yo female s/p right total knee arthroplasty (TKA), anticoagulation & rehab protocol.",
-    icon: "Activity",
-    badge: "Surgical Recovery",
-    text: `POST-OPERATIVE SURGICAL DISCHARGE SUMMARY
-PATIENT: Martha Chen | AGE: 62 | MRN: 481920
-PROCEDURE: Right Total Knee Arthroplasty (TKA) with Stryker Triathlon prosthesis
-SURGEON: Dr. Aaron Bradley, MD (Orthopedic Surgery)
-DISCHARGE DATE: Post-Op Day 3
-
-DIAGNOSIS:
-End-stage right knee tricompartmental osteoarthritis, s/p uncomplicated robotic-assisted right total knee replacement.
-
-OPERATIVE SUMMARY & INPATIENT STAY:
-Patient underwent right TKA under spinal anesthesia with adductor canal block. Hemostasis achieved. Post-op radiographs demonstrate excellent prosthetic component alignment. Patient cleared by physical therapy with walker ambulation >150 feet and independent transfer skills. ROM right knee: 0 degrees extension, 95 degrees flexion. Incision closed with staples and Dermabond Prineo dressing intact without erythema or fluctuance.
-
-DISCHARGE MEDICATIONS:
-1. Enoxaparin (Lovenox) 30 mg subcutaneous injection daily every evening for 14 days total for DVT prophylaxis. (Do not skip; prevents blood clots in legs).
-2. Oxycodone 5 mg PO Q4-6H PRN for breakthrough surgical pain (dispensed #20 tablets). Wean to Tylenol as tolerated.
-3. Acetaminophen (Tylenol) 650 mg PO Q8H scheduled. Do not exceed 3,000 mg total acetaminophen in 24 hours from all sources.
-4. Celecoxib (Celebrex) 200 mg PO daily with breakfast for 2 weeks (anti-inflammatory).
-5. Docusate Sodium (Colace) 100 mg PO BID to prevent opioid-induced constipation.
-
-WOUND & ACTIVITY PROTOCOL:
-- Leave waterproof silver dressing intact until two-week clinic visit. Showering permitted; do not submerge in tub or hot tub.
-- Ice surgical knee 20 minutes on, 20 minutes off, 4-5 times daily using cryotherapy cuff.
-- Weight bearing as tolerated (WBAT) with front-wheeled walker. Transition to cane when cleared by home health PT.
-- Perform ankle pumps 20 times every hour while awake.
-
-FOLLOW-UP APPOINTMENTS:
-- Dr. Bradley Ortho Clinic in 14 days for incision evaluation and staple removal.
-- Home Health Physical Therapy starts within 48 hours (3x/week).
-
-RED FLAGS / EMERGENCY WARNINGS:
-- Sudden calf pain, tenderness, warmth, or swelling in right or left lower leg (suspected DVT).
-- Shortness of breath, rapid heart rate, or chest pain (pulmonary embolism -> CALL 911).
-- Fever >101.5°F, spreading redness >1 inch around surgical incision, or purulent drainage.`
-  },
-  {
-    id: "pulmonary-copd",
-    title: "Respiratory Note (Pneumonia & COPD)",
-    shortDesc: "71yo male admitted with bacterial pneumonia and acute COPD exacerbation.",
-    icon: "ShieldAlert",
-    badge: "Respiratory Care",
-    text: `INPATIENT DISCHARGE SUMMARY
-PATIENT: Arthur Pendelton | AGE: 71 | MRN: 772910
-ATTENDING: Dr. Sarah Lin, MD (Pulmonary & Critical Care)
-DISCHARGE DATE: Day 5 of hospitalization
-
-ADMISSION DIAGNOSIS:
-1. Community-acquired pneumonia (right middle lobe consolidation, Streptococcus pneumoniae)
-2. Acute exacerbation of chronic obstructive pulmonary disease (AECOPD)
-3. Acute hypoxic respiratory failure, resolved (room air SpO2 94% at discharge)
-
-HOSPITAL COURSE:
-Patient admitted with purulent sputum, fever of 102.4°F, wheezing, and tachypnea. Treated with IV Ceftriaxone and Azithromycin, nebulized bronchodilators, and systemic IV Solu-Medrol. Blood cultures negative. Patient transitioned from high-flow nasal cannula down to room air with resting SpO2 94%, 92% on exertion. Afebrile for 48 hours.
-
-DISCHARGE MEDICATIONS:
-1. Levofloxacin (Levaquin) 500 mg PO daily for 5 more days to complete 10-day antibiotic course. Take with full glass of water. Complete entire course!
-2. Prednisone oral taper: 40 mg daily for 2 days, then 20 mg daily for 2 days, then 10 mg daily for 2 days, then STOP. Take with food in the morning.
-3. Fluticasone/Vilanterol (Breo Ellipta) 100/25 mcg 1 inhalation once daily every morning. Rinse mouth with water after use to prevent thrush.
-4. Albuterol / Ipratropium (Combivent Respimat) 1 puff Q4-6H PRN for acute shortness of breath or wheezing.
-5. Guaifenesin (Mucinex) 600 mg PO BID to loosen chest secretions.
-
-HOME CARE & PRECAUTIONS:
-- Incentive spirometer: 10 breaths every hour while awake to expand lung bases.
-- Maintain adequate hydration (unless contraindicated): drink 6-8 glasses of water daily.
-- Strict smoking cessation counseling completed.
-
-FOLLOW-UP:
-- Pulmonary Clinic in 2 weeks for follow-up chest X-ray and pulse oximetry check.
-- Primary Care in 3 weeks.
-
-RED FLAGS:
-- Sudden return of high fever (>101°F) or shaking chills.
-- Inability to catch breath despite rescue inhaler, blue or gray lips/fingertips, or confusion -> CALL 911 immediately.
-- Coughing up bright red blood or thick foul-smelling dark green sputum.`
+    id: "cardiac-chf",
+    title: "Cardiac Discharge Note (CHF & Stent)",
+    shortDesc: "68yo male s/p NSTEMI, acute decompensated heart failure & drug-eluting stent to LAD.",
+    icon: "HeartPulse",
+    badge: "Recommended Sample",
+    precomputedResult: cardiacBackupResultEn,
+    text: sampleCardiacText
   }
 ];

@@ -1,3 +1,5 @@
+export type SupportedLanguage = 'en' | 'hi' | 'mr';
+
 export interface PrimaryDiagnosis {
   clinicalTerm: string;
   plainEnglish: string;
@@ -52,6 +54,8 @@ export interface MedicalJargonTerm {
 
 export interface CareBridgeResult {
   patientGreeting: string;
+  simplifiedOverview: string; // 2-3 sentence plain explanation in selected language
+  targetLanguage: SupportedLanguage;
   executiveSummary: {
     hospitalStayReason: string;
     conditionExplained: string;
@@ -78,4 +82,5 @@ export interface SampleNote {
   badge: string;
   text: string;
   precomputedResult?: CareBridgeResult;
+  sampleImageUrl?: string;
 }

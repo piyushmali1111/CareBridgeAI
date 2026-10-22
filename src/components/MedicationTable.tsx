@@ -104,10 +104,10 @@ export const MedicationTable: React.FC<MedicationTableProps> = ({ medications })
           <thead>
             <tr className="bg-slate-50/90 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
               <th className="py-3.5 px-4 w-12 text-center no-print">Done</th>
-              <th className="py-3.5 px-4 min-w-[200px]">Medication Name</th>
-              <th className="py-3.5 px-4 min-w-[190px]">Timing / Frequency</th>
-              <th className="py-3.5 px-4 min-w-[220px]">Purpose (Plain English)</th>
-              <th className="py-3.5 px-4 min-w-[220px]">Special Instructions</th>
+              <th className="py-3.5 px-4 min-w-[200px]">Medicine Name (English Script)</th>
+              <th className="py-3.5 px-4 min-w-[190px]">Timing / Schedule</th>
+              <th className="py-3.5 px-4 min-w-[220px]">Simple Purpose</th>
+              <th className="py-3.5 px-4 min-w-[220px]">Special Instructions (Translated)</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 text-sm">
